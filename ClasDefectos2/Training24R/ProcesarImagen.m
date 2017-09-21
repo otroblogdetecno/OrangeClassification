@@ -113,6 +113,15 @@ fprintf('Segmentacion de mascara para obtener defectos aislados de ROI --> \n');
 %   SegmentacionSobel1(nombreImagenRemovida3, nombreImagenSalida3);
 %   SegmentacionSobel1(nombreImagenRemovida4, nombreImagenSalida4);   
 
+   SegmentacionPrewitt(nombreImagenRemovida1, nombreImagenSalida1);
+   SegmentacionPrewitt(nombreImagenRemovida2, nombreImagenSalida2);
+   SegmentacionPrewitt(nombreImagenRemovida3, nombreImagenSalida3);
+   SegmentacionPrewitt(nombreImagenRemovida4, nombreImagenSalida4);   
+
+   extraerRegionManchasPrewitt( nombreImagenSalida1, nombreImagenDefectos1, tamanoManchas);
+   extraerRegionManchasPrewitt( nombreImagenSalida2, nombreImagenDefectos2, tamanoManchas);
+   extraerRegionManchasPrewitt( nombreImagenSalida3, nombreImagenDefectos3, tamanoManchas);    
+   extraerRegionManchasPrewitt( nombreImagenSalida4, nombreImagenDefectos4, tamanoManchas);
 %% Esto no da tan buenos resultados, luego de experimentar, el procedimiento 1 es el mejor
 %   SegmentacionSobel2(nombreImagenRemovida1, nombreImagenSalida1);
 %   SegmentacionSobel2(nombreImagenRemovida2, nombreImagenSalida2);
@@ -230,6 +239,11 @@ fila=sprintf('%s, %10.4f, %10.4f, %10.4f, %10.4f,%10.4f, %10.4f, %10.4f, %10.4f,
 guardarAVSyze4R( archivoVector, fila)
 
 % -----------------------------------------------------------------------
+
+
+fprintf('Extraccion de características Defectos--> \n');
+%[ sumaArea, redondez, diametro, ejeMayor, ejeMenor, totalPixelesManchas, totalManchas ] = extraerCarPrewitt( nombreImagenRemovida1, nombreImagenDefectos1, nombreImagenDefectos2, nombreImagenDefectos3, nombreImagenDefectos4);
+
 
 
 % -----------------------------------------------------------------------

@@ -37,7 +37,7 @@ nombreImagenP='nombreImagenP';
  archivoConfiguracion=strcat(pathConfiguracion,'20170916configuracion.xml'); %Para coordenadas iniciales en tratamiento de imagenes
  archivoCalibracion=strcat(pathConfiguracion,'20170916calibracion.xml'); %para indicar al usuario en la parte final la calibracion
  
- archivoVector=strcat(pathResultados,'acm2SIZE.csv'); %archivo de salida
+ archivoVectorDef=strcat(pathResultados,'acm2DEF.csv'); %archivo de salida
 
   
  %% Definicion de los cuadros, según numeración 
@@ -78,13 +78,15 @@ Cuadro4_lineaGuiaInicialColumna, Cuadro4_lineaGuiaInicialFila, Cuadro4_espacioCo
 
 %% GRANULOMETRIAS
 areaObjetosRemoverBR=5000; % para siluetas y detección de objetos. Tamaño para realizar granulometria
+
+tamanoManchas=1000; %se utiliza para extracción de contornos
 %% configuracion de umbrales
 canalLMin = 0.0; canalLMax = 96.653; canalAMin = -23.548; canalAMax = 16.303; canalBMin = -28.235; canalBMax = -1.169; %parametros de umbralizacion de fondo
 
 
 % ----- FIN Definicion de topes
 %% Remover archivos antiguos, borrar archivos antiguos
-removerArchivos(archivoVector);
+removerArchivos(archivoVectorDef);
 
 %% --------------------------------------------------------------------
 %carga del listado de nombres
@@ -94,9 +96,11 @@ listado=dir(strcat(pathEntradaImagenes,'*.jpg'));
 for n=1:size(listado)
     fprintf('Extrayendo características para entrenamiento-> %s \n',listado(n).name);    
     nombreImagenP=listado(n).name;    
-    nombreImagenP='010.jpg';
-         ProcesarImagen(pathEntradaImagenes, pathAplicacion, nombreImagenP , archivoCalibracion, archivoVector, ArrayCuadros, areaObjetosRemoverBR, canalLMin, canalLMax, canalAMin, canalAMax, canalBMin, canalBMax);
-    break;
+    %nombreImagenP='011.jpg';
+    %nombreImagenP='191.jpg';
+    ProcesamientoImagen(pathEntradaImagenes, pathAplicacion, nombreImagenP, ArrayCuadros, areaObjetosRemoverBR, canalLMin, canalLMax, canalAMin, canalAMax, canalBMin, canalBMax )
+    ExtraerDefImagen(pathEntradaImagenes, pathAplicacion, nombreImagenP, archivoVectorDef, tamanoManchas)
+    %break;
 end %
 
 total=size(listado);
@@ -104,5 +108,5 @@ total=size(listado);
 fprintf('\n -------------------------------- \n');
 fprintf('Se procesaron un total de %i archivos \n',total(1));
 fprintf('El experto deberá ETIQUETAR %i filas \n',total(1));
-fprintf('En el archivo %s antes de correr el clasificador \n', archivoVector);
+fprintf('En el archivo %s antes de correr el clasificador de DEFECTOS\n', archivoVectorDef);
 fprintf('\n -------------------------------- \n');
