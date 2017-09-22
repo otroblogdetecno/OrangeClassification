@@ -1,4 +1,4 @@
-function [ output_args ] = guardarAVDef( nombreArchivo, filaAgregar )
+function [ ] = guardarAVDef( nombreArchivo, filaAgregar )
 
 fileIDTest = fopen(nombreArchivo,'r'); %el hander para saber si existe
 fileID = fopen(nombreArchivo,'a'); %abre el archivo para agregar datos

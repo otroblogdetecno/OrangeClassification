@@ -36,9 +36,6 @@ nombreImagenP='nombreImagenP';
  %%
  archivoConfiguracion=strcat(pathConfiguracion,'20170916configuracion.xml'); %Para coordenadas iniciales en tratamiento de imagenes
  archivoCalibracion=strcat(pathConfiguracion,'20170916calibracion.xml'); %para indicar al usuario en la parte final la calibracion
- 
- archivoVectorDef=strcat(pathResultados,'acm2DEF.csv'); %archivo de salida
-
   
  %% Definicion de los cuadros, según numeración 
 Fila1=lecturaConfiguracion('Fila1', archivoConfiguracion);
@@ -76,13 +73,15 @@ Cuadro4_lineaGuiaInicialColumna, Cuadro4_lineaGuiaInicialFila, Cuadro4_espacioCo
 0,0,0,0
 ];
 
-%% GRANULOMETRIAS
+%% CONFIGURACIONES DE PROCESAMIENTO DE IMAGENES
 areaObjetosRemoverBR=5000; % para siluetas y detección de objetos. Tamaño para realizar granulometria
-
-tamanoManchas=1000; %se utiliza para extracción de contornos
-%% configuracion de umbrales
+% configuracion de umbrales
 canalLMin = 0.0; canalLMax = 96.653; canalAMin = -23.548; canalAMax = 16.303; canalBMin = -28.235; canalBMax = -1.169; %parametros de umbralizacion de fondo
 
+
+%% CONFIGURACIONES PARA DETECCION DE DEFECTOS
+tamanoManchas=1000; %se utiliza para extracción de contornos. Los contornos se encuentran arriba de 1000 pixeles
+archivoVectorDef=strcat(pathResultados,'acm2DEF.csv'); %archivo de salida
 
 % ----- FIN Definicion de topes
 %% Remover archivos antiguos, borrar archivos antiguos
